@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+</head>
+<body>
+    <h1>상품 리스트 출력 예제</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <td>순번</td>
+                <td>상품명</td>
+                <td>상품설명</td>
+                <td>가격</td>
+                <td>상품등록일</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="itemDto,status: ${itemDtoList}">
+                <!-- <td th:if="${status.even}" th:text="짝수"></td> -->
+                <!--
+                    status에는 현재 반복문에 대한 정보가 존재합니다.
+                    인덱스가 짝수인 경우, status.even은 true가 됩니다.
+                    즉, 현재 인덱스가 짝수라면 순번에 "짝수"를 출력합니다.
+                -->
+                <!-- <td th:unless="${status.even}" th:text="홀수"></td> -->
+                <!-- 현재 인덱스가 짝수가 아닐 경우 즉, 홀수인 경우 순번에
+                     "홀수"를 출력해 줍니다.
+                -->
+                <td th:switch="${status.even}">
+                    <span th:case=true>짝수</span>
+                    <span th:case=false>홀수</span>
+                </td>
+                <td th:text="${itemDto.itemNm}"></td>
+                <td th:text="${itemDto.itemDetail}"></td>
+                <td th:text="${itemDto.price}"></td>
+                <td th:text="${itemDto.regTime}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
